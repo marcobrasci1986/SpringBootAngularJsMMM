@@ -5,6 +5,7 @@ import be.ordina.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -23,12 +24,12 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Item findById(@PathVariable Integer id){
+    public Item findById(@PathVariable Integer id) {
         return itemService.findOne(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Item addItem(@RequestBody Item item) {
+    public Item addItem(@Valid @RequestBody Item item) {
         item.setId(null);
         return itemService.saveAndFlush(item);
     }
